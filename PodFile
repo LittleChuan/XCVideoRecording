@@ -1,0 +1,9 @@
+source 'http://gitlab.baidao.com/ios/ytx-pod-specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+inhibit_all_warnings!
+target 'gogomagic' do
+    pod 'YTXVideoAVPlayer', '~> 0.3.5'
+    pod 'ZFPlayer', '~> 1.1.0'
+    pod 'GPUImage', '~> 0.1.7'
+end

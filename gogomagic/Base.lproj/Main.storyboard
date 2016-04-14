@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +18,69 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8m-2Y-Jc9" userLabel="Video View" customClass="GPUImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bS7-4t-BoW" userLabel="ZF View" customClass="ZFPlayerView">
+                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qk4-aq-WPO" userLabel="YTX View" customClass="YTXVideoAVPlayerView">
+                                <rect key="frame" x="0.0" y="200" width="600" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDo-VI-QQB">
+                                <rect key="frame" x="530" y="550" width="30" height="30"/>
+                                <state key="normal" title="删除"/>
+                                <connections>
+                                    <action selector="delete:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JoQ-Pa-Czk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJt-dt-7g0">
+                                <rect key="frame" x="530" y="500" width="30" height="30"/>
+                                <state key="normal" title="开始"/>
+                                <connections>
+                                    <action selector="start:" destination="BYZ-38-t0r" eventType="touchDown" id="HMY-ph-b9Y"/>
+                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e7L-3g-JzJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="M8m-2Y-Jc9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="47f-Fa-8zH"/>
+                            <constraint firstItem="qk4-aq-WPO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7X6-n8-CWc"/>
+                            <constraint firstItem="bS7-4t-BoW" firstAttribute="top" secondItem="qk4-aq-WPO" secondAttribute="bottom" id="CcD-Qe-9A6"/>
+                            <constraint firstAttribute="trailing" secondItem="M8m-2Y-Jc9" secondAttribute="trailing" id="DIl-jZ-NxX"/>
+                            <constraint firstItem="M8m-2Y-Jc9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DdO-Ax-HkI"/>
+                            <constraint firstAttribute="trailing" secondItem="qk4-aq-WPO" secondAttribute="trailing" id="EIt-6b-UtV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FDo-VI-QQB" secondAttribute="trailing" constant="20" id="Ebp-kt-gE0"/>
+                            <constraint firstItem="PJt-dt-7g0" firstAttribute="bottom" secondItem="FDo-VI-QQB" secondAttribute="top" constant="-20" id="GoR-Hx-ncn"/>
+                            <constraint firstItem="qk4-aq-WPO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NnD-oW-eGS"/>
+                            <constraint firstItem="qk4-aq-WPO" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="OJR-el-R2a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PJt-dt-7g0" secondAttribute="trailing" constant="20" id="P04-Bb-NWv"/>
+                            <constraint firstItem="PJt-dt-7g0" firstAttribute="centerY" secondItem="FDo-VI-QQB" secondAttribute="centerY" id="Q0k-e4-AjQ"/>
+                            <constraint firstItem="bS7-4t-BoW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZxN-7b-Kgg"/>
+                            <constraint firstItem="qk4-aq-WPO" firstAttribute="top" secondItem="M8m-2Y-Jc9" secondAttribute="bottom" id="bIW-kJ-T5Z"/>
+                            <constraint firstItem="M8m-2Y-Jc9" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="eek-9s-aUx"/>
+                            <constraint firstAttribute="trailing" secondItem="bS7-4t-BoW" secondAttribute="trailing" id="s9c-dD-Ken"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FDo-VI-QQB" secondAttribute="bottom" constant="20" id="vQB-E2-9eG"/>
+                            <constraint firstItem="bS7-4t-BoW" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="yml-pl-ihj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7X6-n8-CWc"/>
+                                <exclude reference="Q0k-e4-AjQ"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="M8m-2Y-Jc9" id="UPf-xd-WOd"/>
+                        <outlet property="ytx_player" destination="qk4-aq-WPO" id="l0N-l6-umQ"/>
+                        <outlet property="zf_player" destination="bS7-4t-BoW" id="f7q-Bd-AWi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
