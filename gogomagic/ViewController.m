@@ -10,12 +10,10 @@
 
 #import <GPUImage/GPUImage.h>
 #import <ZFPlayer/ZFPlayer.h>
-#import <YTXVideoAVPlayer/YTXVideoAVPlayerView.h>
 
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
-@property (weak, nonatomic) IBOutlet YTXVideoAVPlayerView *ytx_player;
 @property (weak, nonatomic) IBOutlet ZFPlayerView *zf_player;
 
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
@@ -33,8 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [UIApplication sharedApplication].statusBarHidden = YES;
+    [self resetCamera];
     
+    self.imageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+}
+
+- (void)resetCamera {
     self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
     //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
     //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
@@ -70,8 +72,6 @@
     [self.filter addTarget:self.movieWriter];
     [self.filter addTarget:self.imageView];
     
-    self.imageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-    
     [self.videoCamera startCameraCapture];
 }
 
@@ -80,22 +80,20 @@
     NSLog(@"start recording");
 }
 
-
-
 - (IBAction)stop:(id)sender {
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
     [self.movieWriter finishRecording];
     NSLog(@"finish recording");
     
-    [self.ytx_player setURLString:movieURL.absoluteString];
-    [self.ytx_player play];
-    
     self.zf_player.videoURL = movieURL;
     self.zf_player.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
 }
 
 - (IBAction)delete:(id)sender {
+    [self resetCamera];
+    
+    [self.zf_player resetToPlayNewURL];
 }
 
 
