@@ -5,4 +5,5 @@ inhibit_all_warnings!
 target 'gogomagic' do
     pod 'ZFPlayer', '~> 1.1.0'
     pod 'GPUImage', '~> 0.1.7'
+    pod 'Masonry', '~> 1.0.0'
 end

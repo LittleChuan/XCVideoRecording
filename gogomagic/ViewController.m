@@ -9,12 +9,10 @@
 #import "ViewController.h"
 
 #import <GPUImage/GPUImage.h>
-#import <ZFPlayer/ZFPlayer.h>
 
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
-@property (weak, nonatomic) IBOutlet ZFPlayerView *zf_player;
 
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
 @property (nonatomic, strong) GPUImageSepiaFilter *filter;
@@ -29,18 +27,16 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
+    self.imageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [self resetCamera];
     
-    self.imageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
 }
 
 - (void)resetCamera {
     self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
-    //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
-    //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
-    //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1920x1080 cameraPosition:AVCaptureDevicePositionBack];
     self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     self.videoCamera.horizontallyMirrorFrontFacingCamera = NO;
     self.videoCamera.horizontallyMirrorRearFacingCamera = NO;
@@ -81,19 +77,14 @@
 }
 
 - (IBAction)stop:(id)sender {
-    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
-    NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
     [self.movieWriter finishRecording];
     NSLog(@"finish recording");
     
-    self.zf_player.videoURL = movieURL;
-    self.zf_player.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
+    [self performSegueWithIdentifier:@"Edit" sender:self];
 }
 
 - (IBAction)delete:(id)sender {
-    [self resetCamera];
-    
-    [self.zf_player resetToPlayNewURL];
+//    [self resetCamera];
 }
 
 
