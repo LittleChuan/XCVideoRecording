@@ -11,15 +11,21 @@
 #import <ZFPlayer/ZFPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface EditController ()
+@interface EditController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet ZFPlayerView *zf_player;
 
 @property (strong, nonatomic) AVAsset *asset;
 
+@property (strong, nonatomic) AVAssetImageGenerator *imageGenerator;
+
 @property (strong, nonatomic) UIView *trimView;
 
 @property (strong, nonatomic) UIView *timeBarView;
+
+@property (strong, nonatomic) UICollectionView *coverCollectionView;
+
+@property (strong, nonatomic) NSArray *covers;
 
 @end
 
@@ -39,7 +45,25 @@
     self.timeBarView.backgroundColor = [UIColor clearColor];
     
     self.asset = [AVAsset assetWithURL:movieURL];
-    NSLog(@"%lld", self.asset.duration.value / self.asset.duration.timescale);
+    
+    self.imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:self.asset];
+    
+    float durationSeconds = CMTimeGetSeconds(self.asset.duration);
+    
+    CMTime firstThird = CMTimeMakeWithSeconds(durationSeconds/3.0, 600);
+    CMTime secondThird = CMTimeMakeWithSeconds(durationSeconds*2.0/3.0, 600);
+    CMTime end = CMTimeMakeWithSeconds(durationSeconds, 600);
+    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero],
+                       [NSValue valueWithCMTime:firstThird],
+                       [NSValue valueWithCMTime:secondThird],
+                       [NSValue valueWithCMTime:end]];
+    
+    [self.imageGenerator generateCGImagesAsynchronouslyForTimes:times completionHandler:^(CMTime requestedTime, CGImageRef  _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error) {
+        self.covers = [[self.covers mutableCopy] arrayByAddingObject:[UIImage imageWithCGImage:image]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.coverCollectionView reloadData];
+        });
+    }];
 }
 
 - (UIView *)trimView {
@@ -89,7 +113,79 @@
     return _timeBarView;
 }
 
+#pragma mark - get cover
+- (UICollectionView *)coverCollectionView {
+    if (!_coverCollectionView) {
+        UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+        layout.scrollDirection             = UICollectionViewScrollDirectionHorizontal;
+        layout.minimumLineSpacing          = 0;
+        layout.minimumInteritemSpacing     = 0;
+        layout.itemSize                    = CGSizeMake(self.view.frame.size.width / 4, self.view.frame.size.width / 4);
+        
+        _coverCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        _coverCollectionView.delegate = self;
+        _coverCollectionView.dataSource = self;
+        [_coverCollectionView registerClass:[CoverCell class] forCellWithReuseIdentifier:@"CoverCell"];
+        [self.view addSubview:_coverCollectionView];
+        
+        [_coverCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.zf_player.mas_leading);
+            make.trailing.equalTo(self.zf_player.mas_trailing);
+            make.top.equalTo(self.zf_player.mas_bottom);
+            make.height.mas_equalTo(self.view.frame.size.width / 4);
+        }];
+    }
+    
+    return _coverCollectionView;
+}
+
+- (NSArray *)covers {
+    if (!_covers) {
+        _covers = @[];
+    }
+    return _covers;
+}
+
+#pragma mark - close
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - collection delegate datasource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.covers.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CoverCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CoverCell" forIndexPath:indexPath];
+    cell.cover = self.covers[indexPath.item];
+    return cell;
+}
+
+@end
+
+@interface CoverCell ()
+
+@property (nonatomic, strong) UIImageView *imageView;
+
+@end
+
+@implementation CoverCell
+
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [UIImageView new];
+        [self addSubview:_imageView];
+        
+        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
+    }
+    return _imageView;
+}
+
+- (void)setCover:(UIImage *)cover {
+    self.imageView.image = cover;
+}
+
 @end

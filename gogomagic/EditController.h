@@ -11,3 +11,9 @@
 @interface EditController : UIViewController
 
 @end
+
+@interface CoverCell : UICollectionViewCell
+
+@property (nonatomic, strong, nonnull) UIImage *cover;
+
+@end
