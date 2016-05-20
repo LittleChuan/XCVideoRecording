@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2DE6A9F608E65F39E31A1FA6 /* libPods-gogomagic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D258DC1F5552D98C9ACC6DB /* libPods-gogomagic.a */; };
+		626DEF6D1CEEA63500C45003 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 626DEF6C1CEEA63500C45003 /* CameraView.m */; };
 		62782F9B1CBF26100001D0C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62782F9A1CBF26100001D0C4 /* main.m */; };
 		62782F9E1CBF26100001D0C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62782F9D1CBF26100001D0C4 /* AppDelegate.m */; };
 		62782FA11CBF26100001D0C4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62782FA01CBF26100001D0C4 /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		626DEF6B1CEEA63500C45003 /* CameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
+		626DEF6C1CEEA63500C45003 /* CameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
 		62782F961CBF26100001D0C4 /* gogomagic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gogomagic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62782F9A1CBF26100001D0C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		62782F9C1CBF26100001D0C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 				62782FA71CBF26100001D0C4 /* LaunchScreen.storyboard */,
 				62782FAA1CBF26100001D0C4 /* Info.plist */,
 				62782F991CBF26100001D0C4 /* Supporting Files */,
+				626DEF6B1CEEA63500C45003 /* CameraView.h */,
+				626DEF6C1CEEA63500C45003 /* CameraView.m */,
 			);
 			path = gogomagic;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			files = (
 				62782FA11CBF26100001D0C4 /* ViewController.m in Sources */,
 				6290223F1CC486610090C261 /* EditController.m in Sources */,
+				626DEF6D1CEEA63500C45003 /* CameraView.m in Sources */,
 				62782F9E1CBF26100001D0C4 /* AppDelegate.m in Sources */,
 				62782F9B1CBF26100001D0C4 /* main.m in Sources */,
 			);

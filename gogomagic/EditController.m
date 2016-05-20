@@ -42,7 +42,7 @@
     self.zf_player.videoURL = movieURL;
     self.zf_player.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
     
-    self.timeBarView.backgroundColor = [UIColor clearColor];
+    self.timeBarView.hidden = NO;
     
     self.asset = [AVAsset assetWithURL:movieURL];
     
@@ -66,6 +66,7 @@
     }];
 }
 
+#pragma mark - trim
 - (UIView *)trimView {
     if (!_trimView) {
         _trimView = [UIView new];
@@ -74,16 +75,14 @@
         [self.zf_player addSubview:_trimView];
         
         [_trimView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.zf_player.mas_leading);
-            make.trailing.equalTo(self.zf_player.mas_trailing);
-            make.bottom.equalTo(self.zf_player.mas_bottom);
-            make.height.equalTo(@30);
+            make.leading.equalTo(self.zf_player);
+            make.trailing.equalTo(self.zf_player);
+            make.top.equalTo(self.coverCollectionView.mas_bottom);
+            make.height.equalTo(@100);
         }];
         // start view
         
         // end view
-        
-        // time bar
         
         // commit button
         
@@ -108,7 +107,12 @@
         lineView.backgroundColor = [UIColor redColor];
         [_timeBarView addSubview:lineView];
         
-        
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_timeBarView);
+            make.leading.equalTo(_timeBarView).with.mas_equalTo(10);
+            make.trailing.equalTo(_timeBarView).with.mas_equalTo(-10);
+            make.height.mas_equalTo(1);
+        }];
     }
     return _timeBarView;
 }
