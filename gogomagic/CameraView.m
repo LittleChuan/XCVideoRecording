@@ -75,10 +75,11 @@
 
 - (void)spread {
     self.isSpread = YES;
-//    self.layer.anchorPoint = CGPointMake(.5, .5f);
-//    self.containerView.layer.anchorPoint = CGPointMake(0.5, 0.5);
     [UIView animateWithDuration:0.4 animations:^{
         self.containerView.transform = CGAffineTransformMakeScale(1 / 3.f, 1 / 3.f);
+    } completion:^(BOOL finished) {
+        self.layer.anchorPoint               = CGPointMake(.5, .5);
+        self.containerView.layer.anchorPoint = CGPointMake(.5, .5);
     }];
 }
 
@@ -88,8 +89,6 @@
     NSInteger currentSelected            = [self.filterArray indexOfObject:self.filter];
     self.layer.anchorPoint               = CGPointMake(1 - (currentSelected % 3) / 2.f, 1 - (currentSelected / 3) / 2.f);
     self.containerView.layer.anchorPoint = CGPointMake((currentSelected % 3) / 2.f, (currentSelected / 3) / 2.f);
-    
-    NSLog(@"%zd", currentSelected);
     
     [UIView animateWithDuration:0.4 animations:^{
         self.containerView.transform = CGAffineTransformIdentity;
