@@ -119,9 +119,9 @@
 //    if ([self.videoCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeOn]) {
 //        self.videoCamera.inputCamera.flashMode = AVCaptureFlashModeOn;
 //    }
-    if ([self.videoCamera.inputCamera isTorchModeSupported:AVCaptureTorchModeOn]) {
-        self.videoCamera.inputCamera.torchMode = AVCaptureTorchModeOn;
-    }
+//    if ([self.videoCamera.inputCamera isTorchModeSupported:AVCaptureTorchModeOn]) {
+//        self.videoCamera.inputCamera.torchMode = AVCaptureTorchModeOn;
+//    }
     [self.videoCamera.inputCamera unlockForConfiguration];
     
     [self.movieWriter startRecording];
@@ -133,9 +133,9 @@
 //    if ([self.videoCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeOff]) {
 //        self.videoCamera.inputCamera.flashMode = AVCaptureFlashModeOff;
 //    }
-    if ([self.videoCamera.inputCamera isTorchModeSupported:AVCaptureTorchModeOff]) {
-        self.videoCamera.inputCamera.torchMode = AVCaptureTorchModeOff;
-    }
+//    if ([self.videoCamera.inputCamera isTorchModeSupported:AVCaptureTorchModeOff]) {
+//        self.videoCamera.inputCamera.torchMode = AVCaptureTorchModeOff;
+//    }
     [self.videoCamera.inputCamera unlockForConfiguration];
     
     [self.movieWriter finishRecording];

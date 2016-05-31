@@ -7,13 +7,14 @@
 //
 
 #import "EditController.h"
+#import "VideoView.h"
 
-#import <ZFPlayer/ZFPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Masonry/Masonry.h>
 
 @interface EditController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (weak, nonatomic) IBOutlet ZFPlayerView *zf_player;
+@property (weak, nonatomic) IBOutlet VideoView *zf_player;
 
 @property (strong, nonatomic) AVAsset *asset;
 
@@ -40,7 +41,7 @@
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
     
     self.zf_player.videoURL = movieURL;
-    self.zf_player.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
+//    self.zf_player.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
     
     self.timeBarView.hidden = NO;
     
@@ -166,6 +167,10 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.zf_player.coverImage = self.covers[indexPath.item];
+}
+
 @end
 
 @interface CoverCell ()
@@ -179,6 +184,7 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_imageView];
         
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {

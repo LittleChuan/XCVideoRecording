@@ -16,6 +16,7 @@
 		62782FA61CBF26100001D0C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62782FA51CBF26100001D0C4 /* Assets.xcassets */; };
 		62782FA91CBF26100001D0C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62782FA71CBF26100001D0C4 /* LaunchScreen.storyboard */; };
 		6290223F1CC486610090C261 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6290223E1CC486610090C261 /* EditController.m */; };
+		6295A7181CFD5A6D002B9810 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6295A7171CFD5A6C002B9810 /* VideoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		62782FAA1CBF26100001D0C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6290223D1CC486610090C261 /* EditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditController.h; sourceTree = "<group>"; };
 		6290223E1CC486610090C261 /* EditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditController.m; sourceTree = "<group>"; };
+		6295A7161CFD5A6C002B9810 /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
+		6295A7171CFD5A6C002B9810 /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
 		9D258DC1F5552D98C9ACC6DB /* libPods-gogomagic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gogomagic.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B22254CE1087833C5238132E /* Pods-gogomagic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gogomagic.release.xcconfig"; path = "Pods/Target Support Files/Pods-gogomagic/Pods-gogomagic.release.xcconfig"; sourceTree = "<group>"; };
 		EAB4C0C1CC38C9495E968F46 /* Pods-gogomagic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gogomagic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gogomagic/Pods-gogomagic.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +87,8 @@
 				62782F991CBF26100001D0C4 /* Supporting Files */,
 				626DEF6B1CEEA63500C45003 /* CameraView.h */,
 				626DEF6C1CEEA63500C45003 /* CameraView.m */,
+				6295A7161CFD5A6C002B9810 /* VideoView.h */,
+				6295A7171CFD5A6C002B9810 /* VideoView.m */,
 			);
 			path = gogomagic;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				6290223F1CC486610090C261 /* EditController.m in Sources */,
 				626DEF6D1CEEA63500C45003 /* CameraView.m in Sources */,
 				62782F9E1CBF26100001D0C4 /* AppDelegate.m in Sources */,
+				6295A7181CFD5A6D002B9810 /* VideoView.m in Sources */,
 				62782F9B1CBF26100001D0C4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
