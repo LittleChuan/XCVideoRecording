@@ -7,6 +7,7 @@
 //
 
 #import "VideoView.h"
+#import "ProgressView.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <Masonry/Masonry.h>
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) UIButton *playButton;
 @property (nonatomic, strong) UIImageView *coverImageView;
+@property (nonatomic, strong) ProgressView *progressView;
 
 @end
 
@@ -58,11 +60,15 @@
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     [self setVideoFillMode:AVLayerVideoGravityResizeAspectFill];
     
+    float durationSeconds = CMTimeGetSeconds(self.playerItem.asset.duration);
+    self.progressView.maximumLimit = durationSeconds;
+    
     self.playButton.hidden = NO;
 }
 
 - (void)play {
     [self.player play];
+    [self.progressView beginProgress];
     self.playButton.hidden = YES;
     self.coverImageView.hidden = YES;
 }
@@ -107,6 +113,22 @@
         }];
     }
     return _coverImageView;
+}
+
+- (ProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [ProgressView new];
+        _progressView.progressBarColor = [UIColor grayColor];
+        [self addSubview:_progressView];
+        
+        [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self);
+            make.trailing.equalTo(self);
+            make.bottom.equalTo(self);
+            make.height.equalTo(@5);
+        }];
+    }
+    return _progressView;
 }
 
 - (void)setCoverImage:(UIImage *)coverImage {

@@ -22,6 +22,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaV-sW-vND" customClass="ProgressView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="6Gl-OJ-mlr"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJt-dt-7g0">
                                 <rect key="frame" x="325" y="617" width="30" height="30"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -46,22 +53,26 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="M8m-2Y-Jc9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="47f-Fa-8zH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MWb-vJ-htG" secondAttribute="bottom" constant="20" id="9mI-KL-Fzc"/>
                             <constraint firstAttribute="trailing" secondItem="M8m-2Y-Jc9" secondAttribute="trailing" id="DIl-jZ-NxX"/>
                             <constraint firstItem="M8m-2Y-Jc9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DdO-Ax-HkI"/>
+                            <constraint firstAttribute="trailing" secondItem="iaV-sW-vND" secondAttribute="trailing" id="GVA-yW-Zge"/>
+                            <constraint firstItem="iaV-sW-vND" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="H21-kk-Z3Q"/>
                             <constraint firstItem="MWb-vJ-htG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Kau-Ix-1Hg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PJt-dt-7g0" secondAttribute="bottom" constant="20" id="L8R-pF-aaO"/>
                             <constraint firstAttribute="trailing" secondItem="PJt-dt-7g0" secondAttribute="trailing" constant="20" id="mL7-Vu-xuS"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="M8m-2Y-Jc9" secondAttribute="bottom" id="rxb-VF-IHL"/>
+                            <constraint firstItem="iaV-sW-vND" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yh1-uK-cV2"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="imageView" destination="M8m-2Y-Jc9" id="UPf-xd-WOd"/>
+                        <outlet property="progressView" destination="iaV-sW-vND" id="sSo-St-iXV"/>
                         <segue destination="pXw-F9-IRx" kind="presentation" identifier="Edit" id="LQp-rG-PqL"/>
                     </connections>
                 </viewController>

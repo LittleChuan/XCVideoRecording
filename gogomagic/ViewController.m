@@ -9,12 +9,14 @@
 #import "ViewController.h"
 
 #import "CameraView.h"
+#import "ProgressView.h"
 
 #import <GPUImage/GPUImage.h>
 
-@interface ViewController ()
+@interface ViewController () <ProgressViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CameraView *imageView;
+@property (weak, nonatomic) IBOutlet ProgressView *progressView;
 
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
 @property (nonatomic, strong) GPUImageFilter *filter;
@@ -31,12 +33,13 @@
 }
 
 - (void)viewDidLoad {
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     [self resetCamera];
     self.filter = self.filterArray[4];
     self.imageView.filterArray = self.filterArray;
+    
+    self.progressView.maximumLimit = 15;
+    self.progressView.delegate = self;
+    self.progressView.progressBarColor = [UIColor yellowColor];
 }
 
 - (NSArray<GPUImageFilter *> *)filterArray {
@@ -115,6 +118,8 @@
 }
 
 - (IBAction)start:(id)sender {
+    [self.progressView beginProgress];
+    
     [self.videoCamera.inputCamera lockForConfiguration:nil];
 //    if ([self.videoCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeOn]) {
 //        self.videoCamera.inputCamera.flashMode = AVCaptureFlashModeOn;
@@ -140,16 +145,16 @@
     
     [self.movieWriter finishRecording];
     NSLog(@"finish recording");
-    
+    [self.progressView endProgress];
     [self performSegueWithIdentifier:@"Edit" sender:self];
-}
-
-- (IBAction)delete:(id)sender {
-//    [self resetCamera];
 }
 
 - (IBAction)showFilters:(id)sender {
     [self.imageView spread];
+}
+
+- (void)progressViewDidEndProgressing {
+    [self stop:nil];
 }
 
 @end
